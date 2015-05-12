@@ -19,7 +19,7 @@ easy_sock主要它解决以下问题：
 - 支持通过请求序列号的方式来接收和返回并发请求包(大部分网络协议都支持，否则无法支持并发)
 
 
-## 如何使用
+## 使用方便
 下面通过一个基于easy_sock封装的cmem接口，来演示如何使用：
 ```javascript
 var Cmem = require("cmem_core");
@@ -41,7 +41,7 @@ client.getData("key3",function(err, data){
 注意到key4是在key3回调后才发起请求的，这时候有可能因为前三个请求已经返回而断开连接。遇到这种情况下，程序会再次发起一个新连接完成请求，然后断开。
 当keepAlive=true时，会使用长连接方式，这时候必须主动调用close()方法来断开连接。
 
-## 如何快速开发一个网络接口
+## 三步完成接口开发
 你只需要实现以下3个方法，便可完成任何一种tcp网络请求：
 
 - **encode**:将需要发送的数据按协议进行二进制编码
@@ -50,7 +50,7 @@ client.getData("key3",function(err, data){
 
 任何类型的tcp协议，只要实现了这3个接口，剩下的事情都一样。这就是为什么easy_sock能存在的原因:)
 
-## 接口细节
+## 具体实现
 
 下面通过一个demo演示各接口的使用方法：
 
@@ -72,7 +72,8 @@ function createSocket(){
 		/* 
 		* Check if the package is received complete. If not, return 0.
 		* Otherwise return length of the FIRST complete package.
-		* If the buffer contains more than one package--it usually happens when package size is small--, just return the size of first one(not total).
+		* If the buffer contains more than one package--it usually happens when package size is small--, 
+		* just return the size of first one(not total).
 		*/
 		return len;
 	};
