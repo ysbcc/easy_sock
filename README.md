@@ -129,4 +129,4 @@ easy_sock helps you to build a reliable, friendly used socket Api, with any kind
 > * decode(packet)
 > * isReceiveComplete(packet) 
 
-As a matter of fact, no matter what protocol it is, all works are the same except this three functions. That's the reason why easy_sock is writen.
+As a matter of fact, no matter what protocol it is, all works are the same except these three functions. That's the reason why easy_sock is writen.
