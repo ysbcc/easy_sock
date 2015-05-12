@@ -50,7 +50,7 @@ client.getData("key3",function(err, data){
 
 任何类型的tcp协议，只要实现了这3个接口，剩下的事情都一样。这就是为什么easy_sock能存在的原因:)
 
-## 具体实现
+## 简单例子
 
 下面通过一个demo演示各接口的使用方法：
 
