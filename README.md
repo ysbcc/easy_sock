@@ -1,5 +1,6 @@
 # easy_sock
-快速开发基于tcp连接的二进制网络协议接口的nodejs模块 
+
+快速开发基于tcp连接的二进制网络协议接口的nodejs模块
 A fast way to create TCP based socket apis with nodejs(English version below)
 
 ------
@@ -12,8 +13,10 @@ easy_sock主要它解决以下问题：
 - 在合适的时候自动帮你断开连接或重新建立连接
 
 如果你的网络协议符合以下特性，便可以使用easy_sock：
-- 基于tcp连接
-- 
+- 基于tcp连接，通过二进制或文本协议封包
+- 符合一来一回的应答试请求
+- 支持通过请求序列号的方式来接收和返回并发请求包(大部分网络协议都支持，否则无法支持并发)
+
 
 ## 如何使用
 下面通过一个基于easy_sock封装的cmem接口，来演示如何使用：
