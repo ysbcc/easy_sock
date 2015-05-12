@@ -50,7 +50,76 @@ client.getData("key3",function(err, data){
 
 任何类型的tcp协议，只要实现了这3个接口，剩下的事情都一样。这就是为什么easy_sock能存在的原因:)
 
+## 接口细节
 
+下面通过一个demo演示各接口的使用方法：
+
+```javascript
+function createSocket(){
+	var easysock = new EasySock();
+	easysock.setConfig({
+		ip : "127.0.0.1",
+		port : 9101,	
+		keepAlive : false,	
+		timeout : 50	//0 by default
+	});
+	
+	//check if the package is received complete
+	easysock.isReceiveComplete = function(packet){		
+		var len = 0;	
+		//your code here..
+		
+		/* 
+		* Check if the package is received complete. If not, return 0.
+		* Otherwise return length of the FIRST complete package.
+		* If the buffer contains more than one package--it usually happens when package size is small--, just return the size of first one(not total).
+		*/
+		return len;
+	};
+	
+	//encode the data to binary 
+	easysock.encode = function(data, seq){
+		var packet = new Buffer(100);
+		packet.writeInt32BE(seq, 0);
+		//your code here..
+
+		//Translate the "data"(usually is a json or string) into a Buffer, and return the Buffer
+		return packet;		
+	};
+	
+	//decode the buffer
+	easysock.decode = function(packet){
+		//The packet is a Buffer with a complete response. So decode the buffer to other type of data.
+		var seq = packet.readInt32BE(0);
+		//do sth else
+			
+		//must return the result and seq
+		return {
+			result : {},
+			seq : seq
+		};
+		
+	};
+	return easysock;
+}
+
+var client = createSocket();
+
+client.write({
+		key : ""
+	}, 
+	function(err, data){
+		if (err){
+			//err is a string
+			console.log("fail:" + err);
+		}
+		else{
+			console.log("success");
+			console.dir(data);
+		}
+	}
+);
+```
 
 ##English version
 easy_sock helps you to build a reliable, friendly used socket Api, with any kinds of binary protocols. All you need to do is finish the following functions, then an Api is accomplish.
@@ -60,5 +129,3 @@ easy_sock helps you to build a reliable, friendly used socket Api, with any kind
 > * isReceiveComplete(packet) 
 
 As a matter of fact, no matter what protocol it is, all works are the same except this three functions. That's the reason why easy_sock is writen.
-
-## How to use
