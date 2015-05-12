@@ -1,6 +1,7 @@
 # easy_sock
 
 快速开发基于tcp连接的二进制网络协议接口的nodejs模块
+
 A fast way to create TCP based socket apis with nodejs(English version below)
 
 ------
@@ -36,10 +37,11 @@ client.getData("key3",function(err, data){
 ```
 这是一个短连接的例子(keepAlive=false)。
 可以看到，代码里没有connect、close等方法的调用，因为easy_sock已经帮你封装好了，会在第一次请求的时候建立连接，在没有任何请求后断开连接。注意到代码里面实际包含了并发请求和串行请求，不用担心会同时发起多个tcp connection，所有请求只会共享一个tcp连接。
+
 注意到key4是在key3回调后才发起请求的，这时候有可能因为前三个请求已经返回而断开连接。遇到这种情况下，程序会再次发起一个新连接完成请求，然后断开。
 当keepAlive=true时，会使用长连接方式，这时候必须主动调用close()方法来断开连接。
 
-## 快速实现
+## 如何快速开发一个网络接口
 你只需要实现以下3个方法，便可完成任何一种tcp网络请求：
 
 - **encode**:将需要发送的数据按协议进行二进制编码
