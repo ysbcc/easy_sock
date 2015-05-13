@@ -19,6 +19,8 @@ easy_sock helps you to solve the follow probrams:
 - 自动管理连接状态，在合适的时候帮你断开连接或重新连接
 - 各种异常处理
 
+## 什么场景下适合使用
+
 如果你的网络协议符合以下特性，便可以使用easy_sock：
 - 基于tcp连接，通过二进制或文本协议封包
 - 符合一来一回的应答试请求
