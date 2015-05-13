@@ -2,7 +2,7 @@
 
 快速开发基于tcp连接的二进制网络协议接口的nodejs模块
 
-A fast way to create TCP socket API with nodejs
+A fast way to create TCP socket API in nodejs
 
 ------
 easy_sock帮你快速开发基于tcp协议的接口，快速打通nodejs跟其他私有协议server的交互。让你做到像调用本地接口一样调用server api。
