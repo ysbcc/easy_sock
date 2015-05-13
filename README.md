@@ -61,9 +61,9 @@ All you need to do is finish the following functions, then an Api is accomplish:
 - **decode**:将接收到的包进行解码，转换成js可操作的格式
 - **isReceiveComplete**:判断当前数据包是否完整
 
-任何类型的tcp协议，只要实现了这3个接口，剩下的事情都一样。这就是为什么easy_sock能存在的原因:)
+你可以通过C代码来实现这三个方法。任何类型的tcp协议，只要实现了这3个接口，剩下的事情都一样。这就是为什么easy_sock能存在的原因:)
 
-As a matter of fact, no matter what protocol it is, all works are the same except these three functions. That's why easy_sock is written.
+You can make a gyp to do this. As a matter of fact, no matter what protocol it is, all works are the same except these three functions. That's why easy_sock is written.
 
 ## 简单例子
 
@@ -136,3 +136,5 @@ client.write({
 	}
 );
 ```
+
+目前easy_sock已经接入protobuf、jce、以及cmem等协议。如有任何意见欢迎交流 vicyao#tencent.com
