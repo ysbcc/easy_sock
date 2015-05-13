@@ -14,17 +14,27 @@ easy_sock主要解决以下问题：
 easy_sock helps you to solve the follow probrams:
 
 - 处理socket发送、接收数据，以及数据包完整性校验
+Take care of send/receive message, and check whether the package is complete
 - 封装网络请求中各种复杂的异步调用以及中间过程，屏蔽tcp连接细节
+Take care of asyn calls in socket use. You don't need to call "connect()" before use.
 - 支持长连接、socket复用以及并发请求
+Keep alive mode is available. Send multi request at the same time in a single socket.
 - 自动管理连接状态，在合适的时候帮你断开连接或重新连接
+Connect and close socket Automatically
 - 各种异常处理
+Call you when error occurs
 
 ## 什么场景下适合使用
 
 如果你的网络协议符合以下特性，便可以使用easy_sock：
+In what circumstances can I use easy_sock:
+
 - 基于tcp连接，通过二进制或文本协议封包
+Base on tcp connect, binary or text protocols
 - 符合一来一回的应答试请求
+Send one request and get one response
 - 支持通过请求序列号的方式来接收和返回并发请求包(大部分网络协议都支持，否则无法支持并发)
+The Server side support concurrent request, use sequence number to identify certain request
 
 ## 安装 Install
 
@@ -32,8 +42,9 @@ easy_sock helps you to solve the follow probrams:
 npm install easy_sock
 ```
 
-## 如何让网络请求更简单
+## 使用简单，任性   Easy to use
 下面通过一个基于easy_sock封装的cmem接口，来演示如何使用：
+（下面不翻译了，自己看代码吧）
 ```javascript
 var Cmem = require("cmem_core");
 var client = new Cmem({
