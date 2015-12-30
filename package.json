@@ -1,6 +1,6 @@
 {
   "name": "easy_sock",
-  "version": "0.0.6",
+  "version": "0.2.0",
   "description": "A easy and foolish way to develop a socket module, which is easy to use as well.",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,7 @@
   },
   "license": "ISC",
   "readme": "README.md",
-  "_id": "easy_sock@0.0.5",
+  "_id": "easy_sock@0.2.0",
   "_shasum": "77ea2bfa6c10379f0792e3eb8116bab8d316be62",
   "_from": "easy_sock@"
 }
