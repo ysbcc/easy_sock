@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/ysbcc/easy_sock/issues"
   },
-  "homepage": "https://github.com/ysbcc/easy_sock#readme"
+  "homepage": "https://github.com/ysbcc/easy_sock#readme",
+  "dependencies": {
+    "debug": "^2.2.0"
+  }
 }
