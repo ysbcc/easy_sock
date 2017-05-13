@@ -1,6 +1,6 @@
 //这是用protobuf服务器的一个简单实例，其中的encode和decode没有具体实现，只是展示easy_sock用法
 
-var EasySock = require("./index.js");
+var EasySock = require("./../index.js");
 
 function createSocket(){
 	var easysock = new EasySock();
