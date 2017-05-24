@@ -4,7 +4,7 @@
   "description": "A easy and foolish way to develop a socket module, which is easy to use as well. Now support both TCP and UDP.",
   "main": "index.js",
   "scripts": {
-    "test": "node test.js"
+    "test": "./node_modules/.bin/nyc ./node_modules/.bin/ava test/tcp.test.js"
   },
   "keywords": [
     "socket"
@@ -23,5 +23,10 @@
   "homepage": "https://github.com/ysbcc/easy_sock#readme",
   "dependencies": {
     "debug": "^2.2.0"
+  },
+  "devDependencies": {
+    "ava": "^0.19.1",
+    "nyc": "^10.3.2",
+    "protocol-buffers": "^3.2.1"
   }
 }
