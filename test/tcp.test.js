@@ -69,9 +69,8 @@ ava.serial('服务器重启', async function (t) {
 	});
 	console.log('start');
 	for (let i = 0; i < 5; i++) {
-		let j = i;
 		let error = await t.throws(new Promise((resolve, reject)=> {
-			easysock.write('hehe', {contextid: j}, function (err, data) {
+			easysock.write('hehe', function (err, data) {
 				err ? reject(err) : resolve(data);
 			});
 		}));
