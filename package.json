@@ -1,7 +1,7 @@
 {
   "name": "easy_sock",
-  "version": "0.0.5",
-  "description": "A easy and foolish way to develop a socket module, which is easy to use as well.",
+  "version": "0.3.5",
+  "description": "A easy and foolish way to develop a socket module, which is easy to use as well. Now support both TCP and UDP.",
   "main": "index.js",
   "scripts": {
     "test": "node test.js"
@@ -9,12 +9,19 @@
   "keywords": [
     "socket"
   ],
-  "author": {
-    "name": "vicyao"
-  },
+  "author": "vicyao",
   "license": "ISC",
-  "readme": "ERROR: No README data found!",
-  "_id": "easy_sock@0.0.5",
   "_shasum": "77ea2bfa6c10379f0792e3eb8116bab8d316be62",
-  "_from": "easy_sock@"
+  "_from": "easy_sock@",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ysbcc/easy_sock.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ysbcc/easy_sock/issues"
+  },
+  "homepage": "https://github.com/ysbcc/easy_sock#readme",
+  "dependencies": {
+    "debug": "^2.2.0"
+  }
 }

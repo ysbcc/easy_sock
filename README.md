@@ -4,6 +4,8 @@
 
 A fast way to create TCP socket API in nodejs
 
+0.3.0 updated : easy_sock supports UDP now! See test_udp.js
+
 ------
 easy_sock帮你快速开发基于tcp协议的接口，快速打通nodejs跟其他私有协议server的交互。让你做到像调用本地接口一样调用server api。
 
@@ -150,4 +152,4 @@ client.write({
 );
 ```
 
-目前easy_sock已经接入protobuf、jce、以及cmem等协议。如有任何意见欢迎交流 vicyao#tencent.com
+如有任何意见欢迎交流 vicyao#tencent.com
