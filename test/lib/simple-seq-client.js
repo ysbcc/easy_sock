@@ -55,5 +55,16 @@ module.exports = function (port) {
 		}
 	});
 
+	easysock.writePromise = (function (write) {
+
+	    return function (data) {
+		    return new Promise(function (resolve, reject) {
+			    write.call(easysock, data, function (err, data) {
+				    err ? reject(err) : resolve(data);
+			    })
+		    });
+	    };
+	})(easysock.write);
+
 	return easysock
 };
