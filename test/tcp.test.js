@@ -25,52 +25,56 @@ function forkServer(port) {
 	});
 }
 
-// ava.serial('正常通信', async function (t) {
-// 	let port = 9090 + Math.floor(Math.random() * 100);
-//
-// 	// 创建服务器和easy_sock
-// 	let server = await forkServer(port);
-// 	let easysock = createClient(port);
-//
-// 	for (var i = 0; i < 10; i++) {
-// 		let data = await easysock.write('hehe');
-// 		t.is(data, 'hehe');
-// 	}
-//
-// 	easysock.close();
-// 	await server.close();
-// });
-//
-//
-// ava.serial('服务器进程重启', async function (t) {
-// 	let port = 9090 + Math.floor(Math.random() * 100);
-//
-// 	// 创建服务器和easy_sock
-// 	let server = await forkServer(port);
-// 	let easysock = createClient(port);
-//
-// 	for (let i = 0; i < 5; i++) {
-// 		let data = await easysock.write('hehe');
-// 		t.is(data, 'hehe');
-// 	}
-//
-// 	// 服务器关闭
-// 	await server.close();
-// 	// console.log('start');
-// 	for (let i = 0; i < 5; i++) {
-// 		let error = await t.throws(easysock.write('hehe'));
-// 		// console.error(error.message);
-// 		t.is(error.message, 'easy_sock:TCP connect timeout(600)');
-// 	}
-//
-// 	// 服务器重启完毕
-// 	server = await forkServer(port);
-//
-// 	for (let i = 0; i < 5; i++) {
-// 		let data = await easysock.write('hehe');
-// 		t.is(data, 'hehe');
-// 	}
-// });
+ava.serial('正常通信', async function (t) {
+	let port = 9090 + Math.floor(Math.random() * 100);
+
+	// 创建服务器和easy_sock
+	let server = await forkServer(port);
+	let easysock = createClient(port);
+
+	for (var i = 0; i < 10; i++) {
+		let data = await easysock.writePromise('hehe');
+		t.is(data, 'hehe');
+	}
+
+	easysock.close();
+	await server.close();
+});
+
+
+ava.serial('服务器进程重启', async function (t) {
+	let port = 9090 + Math.floor(Math.random() * 100);
+
+	// 创建服务器和easy_sock
+	let server = await forkServer(port);
+	let easysock = createClient(port);
+
+	for (let i = 0; i < 5; i++) {
+		let data = await easysock.writePromise('hehe');
+		t.is(data, 'hehe');
+	}
+
+	// 服务器关闭
+	await server.close();
+	// console.log('start');
+	for (let i = 0; i < 5; i++) {
+		try {
+			let error = await easysock.writePromise('hehe');
+		} catch(error) {
+			continue;
+		}
+		t.is(false, true)
+		// t.is(error.message, 'easy_sock:TCP connect timeout(600)');
+	}
+
+	// 服务器重启完毕
+	server = await forkServer(port);
+
+	for (let i = 0; i < 5; i++) {
+		let data = await easysock.writePromise('hehe');
+		t.is(data, 'hehe');
+	}
+});
 
 let createServer = require("./lib/simple-seq-server");
 ava.serial('服务器主动关闭连接，然后客户端重连', async function (t) {
