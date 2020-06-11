@@ -106,7 +106,7 @@ ava.serial('并行请求，有超时失败率', async function (t) {
 	let port = 9094;
 	await forkServer(port);
 
-	let easysock = createClient(port, 130); // tcp有可能拼两个包一起返回
+	let easysock = createClient(port, 120); // tcp有可能拼两个包一起返回
 
 	const Number = 5;
 	let failedTime = 0;
