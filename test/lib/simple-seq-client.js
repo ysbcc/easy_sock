@@ -14,6 +14,12 @@ module.exports = function (port, timeout) {
 			// console.log('client encode', data);
 			let body = new Buffer(data, 'utf-8');
 
+			// 假设encode需要50ms
+			let start = Date.now();
+			while(Date.now() - start < 50) {
+				continue
+			}
+
 			let packet = new Buffer(20);
 			//包头-start
 			packet.writeInt8(81, 0);	// Q

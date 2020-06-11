@@ -102,8 +102,30 @@ let createServer = require("./lib/simple-seq-server");
 		t.is(data, 'hehe');
 	}
 }); */
+ava.serial('并行请求，有超时失败率', async function (t) {
+	let port = 9090 + Math.floor(Math.random() * 100);
+	await forkServer(port);
 
-ava.serial('并行请求，一次性压入多次写操作，触发死循环', async function (t) {
+	let easysock = createClient(port, 100);
+
+	const Number = 5;
+	t.plan(Number)
+
+	for (let i = 0; i < Number; i++) {
+		easysock.write('hehe' + i, function (err, data) {
+			console.log(err, data)
+			t.is(typeof data === 'string' && data.indexOf('hehe') !== -1, true)
+		})
+	}
+
+	return await new Promise(rs => {
+		setTimeout(() => {
+			rs()
+		}, 1000);
+	})
+})
+
+ava.serial('第一次连接超时，在close之前创建新连接，触发死循环', async function (t) {
 	let port = 9090 + Math.floor(Math.random() * 100);
 	await forkServer(port);
 
