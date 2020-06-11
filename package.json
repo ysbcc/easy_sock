@@ -1,6 +1,6 @@
 {
   "name": "easy_sock",
-  "version": "0.3.9",
+  "version": "0.4.0",
   "description": "A easy and foolish way to develop a socket module, which is easy to use as well. Now support both TCP and UDP.",
   "main": "index.js",
   "scripts": {
