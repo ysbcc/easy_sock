@@ -25,8 +25,8 @@ function forkServer(port) {
 	});
 }
 
-/* ava.serial('正常通信', async function (t) {
-	let port = 9090 + Math.floor(Math.random() * 100);
+ava.serial('正常通信', async function (t) {
+	let port = 9091;
 
 	// 创建服务器和easy_sock
 	let server = await forkServer(port);
@@ -39,11 +39,10 @@ function forkServer(port) {
 
 	easysock.close();
 	await server.close();
-}); */
+});
 
-
-/* ava.serial('服务器进程重启', async function (t) {
-	let port = 9090 + Math.floor(Math.random() * 100);
+ava.serial('服务器进程重启', async function (t) {
+	let port = 9092;
 
 	// 创建服务器和easy_sock
 	let server = await forkServer(port);
@@ -74,11 +73,11 @@ function forkServer(port) {
 		let data = await easysock.writePromise('hehe');
 		t.is(data, 'hehe');
 	}
-}); */
+});
 
 let createServer = require("./lib/simple-seq-server");
-/* ava.serial('服务器主动关闭连接，然后客户端重连', async function (t) {
-	let port = 9090 + Math.floor(Math.random() * 100);
+ava.serial('服务器主动关闭连接，然后客户端重连', async function (t) {
+	let port = 9093;
 	let server = null;
 
 	await new Promise(resolve=> {
@@ -101,32 +100,38 @@ let createServer = require("./lib/simple-seq-server");
 		let data = await easysock.writePromise('hehe');
 		t.is(data, 'hehe');
 	}
-}); */
+});
+
 ava.serial('并行请求，有超时失败率', async function (t) {
-	let port = 9090 + Math.floor(Math.random() * 100);
+	let port = 9094;
 	await forkServer(port);
 
-	let easysock = createClient(port, 100);
+	let easysock = createClient(port, 130); // tcp有可能拼两个包一起返回
 
 	const Number = 5;
+	let failedTime = 0;
 	t.plan(Number)
 
 	for (let i = 0; i < Number; i++) {
 		easysock.write('hehe' + i, function (err, data) {
 			console.log(err, data)
-			t.is(typeof data === 'string' && data.indexOf('hehe') !== -1, true)
+			if (err) { 
+				failedTime += 1;
+			}
+			t.pass();
 		})
 	}
 
 	return await new Promise(rs => {
 		setTimeout(() => {
+			console.log(`失败率：${failedTime/Number}`);
 			rs()
 		}, 1000);
 	})
 })
 
 ava.serial('第一次连接超时，在close之前创建新连接，触发死循环', async function (t) {
-	let port = 9090 + Math.floor(Math.random() * 100);
+	let port = 9095;
 	await forkServer(port);
 
 	let easysock = createClient(port, 100);
@@ -147,7 +152,7 @@ ava.serial('第一次连接超时，在close之前创建新连接，触发死循
 		console.log('client socket begin write ...')
 		for (let i = 0; i < Number; i++) {
 			easysock.write('hehe' + i, function (err, data) {
-				console.log(err, data);
+				console.log('请求有回调，没有死循环', err, data);
 				t.pass()
 			})
 		}
@@ -155,7 +160,6 @@ ava.serial('第一次连接超时，在close之前创建新连接，触发死循
 
 
 	await new Promise(rs => {
-		t.pass();
 		setTimeout(() => {
 			rs()
 		}, 1000);
