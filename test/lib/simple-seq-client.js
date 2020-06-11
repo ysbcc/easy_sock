@@ -1,13 +1,13 @@
 'use strict';
 const EasySock = require("../../index");
 
-module.exports = function (port) {
+module.exports = function (port, timeout) {
 	let easysock = new EasySock();
 	easysock.setConfig({
 		ip: "127.0.0.1",
 		port: port,
 		keepAlive: true,
-		timeout: 200    //0 by default
+		timeout: timeout || 200    //0 by default
 	});
 	Object.assign(easysock, {
 		encode: function (data, seq) {
